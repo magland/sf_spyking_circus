@@ -1,0 +1,57 @@
+Bootstrap: docker
+
+From: continuumio/miniconda3
+
+
+%runscript
+
+    cd /src/spikeforest/spikeforest/sf_batch
+    python driver_sf_batch.py run $*
+
+%files
+
+%environment
+
+
+%labels
+
+   AUTHOR jmagland@flatironinstitute.org
+
+%post
+	#########################################
+	### Conda and python 3.6
+	apt-get update
+  apt-get -y install git wget
+  apt-get install -y build-essential
+
+  . /opt/conda/etc/profile.d/conda.sh
+  conda activate base
+  conda install python=3.6
+
+  #########################################
+  ### SpikeForest
+  mkdir /src
+
+  git clone https://github.com/magland/spikeforest /src/spikeforest
+
+  cd /src/spikeforest
+  pip install pybind11
+  pip install isosplit5
+  python setup.py develop
+
+  #########################################
+  ### Spyking Circus
+
+  apt-get install -y libopenmpi-dev
+  pip install spyking-circus
+  pip install pyqt5
+  apt-get install -y libglib2.0-0
+  apt-get install -y libgl1-mesa-glx
+
+
+
+
+
+
+
+
