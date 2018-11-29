@@ -2,11 +2,9 @@ Bootstrap: docker
 
 From: continuumio/miniconda3
 
-
 %files
 
 %environment
-
 
 %labels
 
@@ -24,6 +22,15 @@ From: continuumio/miniconda3
   conda install python=3.6
 
   #########################################
+  ### Spyking Circus
+
+  apt-get install -y libopenmpi-dev
+  pip install spyking-circus
+  pip install pyqt5
+  apt-get install -y libglib2.0-0
+  apt-get install -y libgl1-mesa-glx
+
+  #########################################
   ### SpikeForest
   pip install spikeforest
 
@@ -35,12 +42,3 @@ From: continuumio/miniconda3
 
   cd /src/spikeforest_batch_run
   python setup.py develop
-
-  #########################################
-  ### Spyking Circus
-
-  apt-get install -y libopenmpi-dev
-  pip install spyking-circus
-  pip install pyqt5
-  apt-get install -y libglib2.0-0
-  apt-get install -y libgl1-mesa-glx
