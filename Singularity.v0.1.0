@@ -16,3 +16,5 @@ From: magland/spyking_circus
   ### SpikeForest
   pip install spikeforest
 
+  apt-get install -y packagekit-gtk3-module
+  apt install -y libcanberra-gtk-module libcanberra-gtk3-module
