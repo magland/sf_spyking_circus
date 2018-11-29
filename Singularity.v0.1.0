@@ -34,11 +34,3 @@ From: continuumio/miniconda3
   ### SpikeForest
   pip install spikeforest
 
-  ########################################
-  ### spikeforest_batch_run
-  mkdir /src
-
-  git clone https://github.com/magland/spikeforest_batch_run /src/spikeforest_batch_run
-
-  cd /src/spikeforest_batch_run
-  python setup.py develop
