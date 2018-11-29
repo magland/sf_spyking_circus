@@ -1,5 +1,8 @@
 #!/bin/bash
 
+DEST=$1
+RECIPE=$2
+
 ## This will be the command we run inside docker container
 cmd="cd /working"
 
@@ -8,11 +11,11 @@ cmd="$cmd && groupadd -g $(id -g) tmpgroup"
 cmd="$cmd && useradd -u $(id -u) -g $(id -g) -d /home/tmpuser -s /bin/bash -p nopass tmpuser"
 
 ## Here is the singularity build command
-cmd="$cmd && singularity build /tmp/out.simg Singularity.v0.1.0"
+cmd="$cmd && singularity build /tmp/out.simg $RECIPE"
 
 ## Change the ownership of the file and move it over, acting as that user (yikes)
 cmd="$cmd && chown $(id -u):$(id -g) /tmp/out.simg"
-cmd="$cmd && su tmpuser -c \"mv /tmp/out.simg sf_spyking_circus.simg\""
+cmd="$cmd && su tmpuser -c \"mv /tmp/out.simg $DEST\""
 
 ## Run the command inside the docker container
 docker run --privileged -v $PWD:/working magland/singularity:2.6.0 \

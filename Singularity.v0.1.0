@@ -1,6 +1,6 @@
 Bootstrap: docker
 
-From: ubuntu:18.04
+From: magland/spyking_circus
 
 %files
 
@@ -11,26 +11,6 @@ From: ubuntu:18.04
    AUTHOR jmagland@flatironinstitute.org
 
 %post
-  #########################################
-  ### python 3.6
-  apt-get update
-  apt-get -y install git wget
-  apt-get install -y build-essential
-  apt-get install -y python3
-  apt-get install -y python3-pip
-  ln -s python3 /usr/bin/python
-  ln -s pip3 /usr/bin/pip
-  apt-get install -y python3-tk
-
-  #########################################
-  ### Spyking Circus
-
-  apt-get install -y libopenmpi-dev
-  pip install spyking-circus
-  pip install pyqt5
-  apt-get install -y libglib2.0-0
-  apt-get install -y libgl1-mesa-glx
-  apt-get install -y qt5-default
 
   #########################################
   ### SpikeForest
