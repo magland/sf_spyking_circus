@@ -30,6 +30,7 @@ From: ubuntu:18.04
   pip install pyqt5
   apt-get install -y libglib2.0-0
   apt-get install -y libgl1-mesa-glx
+  apt-get install -y qt5-default
 
   #########################################
   ### SpikeForest
