@@ -3,11 +3,6 @@ Bootstrap: docker
 From: continuumio/miniconda3
 
 
-%runscript
-
-    cd /src/spikeforest/spikeforest/sf_batch
-    python driver_sf_batch.py run $*
-
 %files
 
 %environment
@@ -18,9 +13,9 @@ From: continuumio/miniconda3
    AUTHOR jmagland@flatironinstitute.org
 
 %post
-	#########################################
-	### Conda and python 3.6
-	apt-get update
+  #########################################
+  ### Conda and python 3.6
+  apt-get update
   apt-get -y install git wget
   apt-get install -y build-essential
 
@@ -30,13 +25,15 @@ From: continuumio/miniconda3
 
   #########################################
   ### SpikeForest
+  pip install spikeforest
+
+  ########################################
+  ### spikeforest_batch_run
   mkdir /src
 
-  git clone https://github.com/magland/spikeforest /src/spikeforest
+  git clone https://github.com/magland/spikeforest_batch_run /src/spikeforest_batch_run
 
-  cd /src/spikeforest
-  pip install pybind11
-  pip install isosplit5
+  cd /src/spikeforest_batch_run
   python setup.py develop
 
   #########################################
@@ -47,11 +44,3 @@ From: continuumio/miniconda3
   pip install pyqt5
   apt-get install -y libglib2.0-0
   apt-get install -y libgl1-mesa-glx
-
-
-
-
-
-
-
-
